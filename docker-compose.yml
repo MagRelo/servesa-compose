@@ -1,0 +1,70 @@
+version: '3'
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: 'mongodb'
+    environment:
+      - MONGO_DATA_DIR=/data/db
+      - MONGO_LOG_DIR=/dev/null
+    volumes:
+      - ./data/db:/data/db
+    command: mongod --smallfiles --logpath=/dev/null # --quiet
+
+  homepage:
+    image: 'magelo/servesa-home:latest'
+    container_name: homepage
+    restart: on-failure
+
+  # signing:
+  #   image: ''
+  #   container_name: signing
+  #   restart: on-failure
+
+  # midifighter:
+  #   image: ''
+  #   container_name: midi
+  #   restart: on-failure
+
+  # souvenir:
+  #   image: ''
+  #   container_name: souvenir
+  #   restart: on-failure
+
+  # garden:
+  #   image: ''
+  #   container_name: garden
+  #   restart: on-failure
+
+  # app:
+  #   image: 241820317069.dkr.ecr.us-east-1.amazonaws.com/system-interfaces:latest
+  #   container_name: pragma-app
+  #   environment:
+  #     - NODE_ENV=production
+  #     - ENV=production
+  #     - MONGODB_URL_INT=mongodb://mongodb:27017/pragma_bondAuction
+  #   links:
+  #     - mongodb
+  #     - publicnode
+  #   depends_on:
+  #     - mongodb
+  #     - publicnode
+  #   restart: on-failure
+
+  nginx:
+    build:
+      context: ./nginx
+      args:
+        - env=${ENV}
+    container_name: nginx
+    volumes:
+      - ssl:/etc/ssl
+      - certs:/etc/letsencrypt
+      - certs-data:/data/letsencrypt
+    links:
+      # - pragma-app:pragma-app
+      # - pragma-docs:pragma-docs
+    ports:
+      - '80:80'
+      - '443:443'
+      - '3000:3000'
+      - '4000:4000'
