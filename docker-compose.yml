@@ -11,7 +11,7 @@ services:
     command: mongod --smallfiles --logpath=/dev/null # --quiet
 
   homepage:
-    image: 'magelo/servesa-home:latest'
+    image: 'magrelo/servesa-home:latest'
     container_name: homepage
     restart: on-failure
 
@@ -57,9 +57,9 @@ services:
         - env=${ENV}
     container_name: nginx
     volumes:
-      - ssl:/etc/ssl
-      - certs:/etc/letsencrypt
-      - certs-data:/data/letsencrypt
+      - /etc/ssl:/etc/ssl
+      - /etc/letsencrypt:/etc/letsencrypt
+      - /data/letsencrypt:/data/letsencrypt
     ports:
       - '80:80'
       - '443:443'
