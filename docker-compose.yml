@@ -60,9 +60,6 @@ services:
       - ssl:/etc/ssl
       - certs:/etc/letsencrypt
       - certs-data:/data/letsencrypt
-    links:
-      # - pragma-app:pragma-app
-      # - pragma-docs:pragma-docs
     ports:
       - '80:80'
       - '443:443'
