@@ -6,7 +6,5 @@ FROM nginx:alpine
 COPY ./nginx.conf /etc/nginx/nginx.conf
 COPY ./snippets /etc/nginx/snippets
 
-EXPOSE 80 443 3000
-
 # Start Nginx when the container has provisioned.
 CMD ["nginx", "-g", "daemon off;"]

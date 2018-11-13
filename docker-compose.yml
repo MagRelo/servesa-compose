@@ -15,25 +15,15 @@ services:
     container_name: homepage
     restart: on-failure
 
-  # signing:
-  #   image: ''
-  #   container_name: signing
-  #   restart: on-failure
+  homepage2:
+    image: 'magrelo/servesa-home:latest'
+    container_name: homepage2
+    restart: on-failure
 
-  # midifighter:
-  #   image: ''
-  #   container_name: midi
-  #   restart: on-failure
-
-  # souvenir:
-  #   image: ''
-  #   container_name: souvenir
-  #   restart: on-failure
-
-  # garden:
-  #   image: ''
-  #   container_name: garden
-  #   restart: on-failure
+  homepage3:
+    image: 'magrelo/servesa-home:latest'
+    container_name: homepage3
+    restart: on-failure
 
   # app:
   #   image: 241820317069.dkr.ecr.us-east-1.amazonaws.com/system-interfaces:latest
@@ -56,6 +46,5 @@ services:
       context: ./nginx/dev
     ports:
       - '80:80'
-      - '443:443'
+      - '2000:2000'
       - '3000:3000'
-      - '4000:4000'
