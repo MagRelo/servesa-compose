@@ -51,15 +51,9 @@ services:
   #   restart: on-failure
 
   nginx:
-    build:
-      context: ./nginx
-      args:
-        - env=${ENV}
     container_name: nginx
-    volumes:
-      - /etc/ssl:/etc/ssl
-      - /etc/letsencrypt:/etc/letsencrypt
-      - /data/letsencrypt:/data/letsencrypt
+    build:
+      context: ./nginx/dev
     ports:
       - '80:80'
       - '443:443'
