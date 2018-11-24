@@ -25,7 +25,13 @@ services:
     container_name: garden
     restart: on-failure
 
+  souvenir:
+    image: 'magrelo/souvenir:latest'
+    container_name: souvenir
+    restart: on-failure
+
   nginx:
+    container_name: nginx
     build:
       context: ./nginx/prod
     ports:
