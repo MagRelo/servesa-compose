@@ -20,6 +20,11 @@ services:
     container_name: midifighter
     restart: on-failure
 
+  garden:
+    image: 'magrelo/garden:latest'
+    container_name: garden
+    restart: on-failure
+
   nginx:
     build:
       context: ./nginx/prod
