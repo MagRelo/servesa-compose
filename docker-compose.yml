@@ -21,7 +21,7 @@ services:
     restart: on-failure
 
   garden:
-    image: 'magrelo/garden:latest'
+    image: 'magrelo/communitygarden:latest'
     container_name: garden
     restart: on-failure
 
