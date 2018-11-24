@@ -15,16 +15,26 @@ services:
     container_name: homepage
     restart: on-failure
 
-  homepage2:
-    image: 'magrelo/servesa-home:latest'
-    container_name: homepage2
+  midifighter:
+    image: 'magrelo/midifighter:latest'
+    container_name: midifighter
     restart: on-failure
 
   homepage3:
     image: 'magrelo/servesa-home:latest'
-    container_name: homepage3
+    container_name: homepage
     restart: on-failure
 
+  nginx:
+    build:
+      context: ./nginx/prod
+    ports:
+      - '80:80'
+      - '443:443'
+    volumes:
+      - /etc/ssl:/etc/ssl
+      - /etc/letsencrypt:/etc/letsencrypt
+      - /data/letsencrypt:/data/letsencrypt
   # app:
   #   image: 241820317069.dkr.ecr.us-east-1.amazonaws.com/system-interfaces:latest
   #   container_name: pragma-app
@@ -39,13 +49,3 @@ services:
   #     - mongodb
   #     - publicnode
   #   restart: on-failure
-  nginx:
-    build:
-      context: ./nginx/prod
-    ports:
-      - '80:80'
-      - '443:443'
-    volumes:
-      - /etc/ssl:/etc/ssl
-      - /etc/letsencrypt:/etc/letsencrypt
-      - /data/letsencrypt:/data/letsencrypt
