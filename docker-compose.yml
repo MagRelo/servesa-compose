@@ -20,11 +20,6 @@ services:
     container_name: midifighter
     restart: on-failure
 
-  homepage3:
-    image: 'magrelo/servesa-home:latest'
-    container_name: homepage
-    restart: on-failure
-
   nginx:
     build:
       context: ./nginx/prod
