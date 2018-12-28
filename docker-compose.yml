@@ -30,7 +30,7 @@ services:
     container_name: souvenir
     restart: on-failure
 
-  signingdemo:
+  signatures:
     image: 'magrelo/signingdemo:latest'
     container_name: signingdemo
     restart: on-failure
