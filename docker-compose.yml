@@ -30,6 +30,15 @@ services:
     container_name: souvenir
     restart: on-failure
 
+  signingdemo:
+    image: 'magrelo/signingdemo:latest'
+    container_name: signingdemo
+    restart: on-failure
+    environment:
+      - MONGODB_URL_INT=mongodb://mongodb:27017/signingdemo
+    depends_on:
+      - mongodb
+
   nginx:
     container_name: nginx
     build:
@@ -41,17 +50,3 @@ services:
       - /etc/ssl:/etc/ssl
       - /etc/letsencrypt:/etc/letsencrypt
       - /data/letsencrypt:/data/letsencrypt
-  # app:
-  #   image: 241820317069.dkr.ecr.us-east-1.amazonaws.com/system-interfaces:latest
-  #   container_name: pragma-app
-  #   environment:
-  #     - NODE_ENV=production
-  #     - ENV=production
-  #     - MONGODB_URL_INT=mongodb://mongodb:27017/pragma_bondAuction
-  #   links:
-  #     - mongodb
-  #     - publicnode
-  #   depends_on:
-  #     - mongodb
-  #     - publicnode
-  #   restart: on-failure
