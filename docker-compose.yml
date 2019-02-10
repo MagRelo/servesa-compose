@@ -43,6 +43,8 @@ services:
     image: 'magrelo/golf-page:latest'
     container_name: golf
     restart: on-failure
+    environment:
+      - MONGODB_URL_INT=mongodb://mongodb:27017/golf
 
   nginx:
     container_name: nginx
