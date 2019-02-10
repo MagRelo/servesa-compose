@@ -39,6 +39,11 @@ services:
     depends_on:
       - mongodb
 
+  golf:
+    image: 'magrelo/golf-page:latest'
+    container_name: golf
+    restart: on-failure
+
   nginx:
     container_name: nginx
     build:
