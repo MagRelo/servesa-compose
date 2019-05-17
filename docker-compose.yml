@@ -46,6 +46,13 @@ services:
     environment:
       - MONGODB_URL_INT=mongodb://mongodb:27017/golf
 
+  referral:
+    image: 'magrelo/referral:latest'
+    container_name: referral
+    restart: on-failure
+    environment:
+      - MONGODB_URL_INT=mongodb://mongodb:27017/referral
+
   nginx:
     container_name: nginx
     build:
