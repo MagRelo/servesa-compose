@@ -1,0 +1,22 @@
+{
+  "name": "servesa-compose",
+  "version": "1.0.0",
+  "description": "Server infrastructure for servesa.io",
+  "main": "index.js",
+  "scripts": {
+    "ssh": "ssh root@209.97.154.109"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MagRelo/servesa-compose.git"
+  },
+  "keywords": [
+    "docker"
+  ],
+  "author": "Matt Lovan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MagRelo/servesa-compose/issues"
+  },
+  "homepage": "https://github.com/MagRelo/servesa-compose#readme"
+}
