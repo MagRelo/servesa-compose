@@ -92,6 +92,8 @@ services:
     depends_on:
       - miner
       - netstats
+    ports:
+      - '30303:30303'
     environment:
       - TZ=`ls -la /etc/localtime | cut -d/ -f8-9
     entrypoint: /root/start.sh
@@ -105,12 +107,15 @@ services:
     container_name: nginx
     build:
       context: ./nginx/prod
+    depends_on:
+      - miner
+      - publicnode
+      - netstats
     ports:
       - '80:80'
       - '443:443'
       - '8545:8545'
       - '8546:8546'
-      - '30303:30303'
     volumes:
       - /etc/ssl:/etc/ssl
       - /etc/letsencrypt:/etc/letsencrypt
