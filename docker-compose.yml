@@ -94,6 +94,8 @@ services:
       - netstats
     ports:
       - '30303:30303'
+      - '8545:8545'
+      - '8546:8546'
     environment:
       - TZ=`ls -la /etc/localtime | cut -d/ -f8-9
     entrypoint: /root/start.sh
@@ -114,8 +116,6 @@ services:
     ports:
       - '80:80'
       - '443:443'
-      - '8545:8545'
-      - '8546:8546'
     volumes:
       - /etc/ssl:/etc/ssl
       - /etc/letsencrypt:/etc/letsencrypt
