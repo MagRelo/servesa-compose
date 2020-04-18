@@ -1,19 +1,29 @@
 version: '3'
 services:
+  content:
+    image: 'ghost:latest'
+    container_name: content
+    restart: on-failure
+    environment:
+      url: http://localhost:8000
+
   nginx:
-    container_name: nginx
-    build:
-      context: ./nginx/dev
+    image: nginx:1.15-alpine
+    restart: unless-stopped
+    volumes:
+      - ./nginx/dev:/etc/nginx/conf.d
+
+      - ./data/certbot/conf:/etc/letsencrypt
+      - ./data/certbot/www:/var/www/certbot
     ports:
       - '80:80'
-      - '2000:2000'
-      - '3000:3000'
-      - '4000:4000'
-      - '5000:5000'
-      - '7000:7000'
-      - '8000:8000'
-      - '9000:9000'
+      - '443:443'
+    command: '/bin/sh -c ''while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g "daemon off;"'''
+
+  certbot:
+    image: certbot/certbot
+    restart: 'no'
     volumes:
-      - /:/etc/ssl
       - /:/etc/letsencrypt
-      - /:/data/letsencrypt
+      - /:/var/www/certbot
+    entrypoint: '/bin/true'
