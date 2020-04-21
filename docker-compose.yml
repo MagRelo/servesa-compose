@@ -11,9 +11,12 @@ services:
     restart: on-failure
     environment:
       url: https://content.mattlovan.com
+    volumes:
+      - ./data/ghost:/var/lib/ghost/content
 
   nginx:
     image: nginx:1.15-alpine
+    container_name: nginx
     restart: unless-stopped
     volumes:
       - ./nginx/prod:/etc/nginx/conf.d
@@ -27,6 +30,7 @@ services:
 
   certbot:
     image: certbot/certbot
+    container_name: certbot
     restart: unless-stopped
     volumes:
       - ./data/certbot/conf:/etc/letsencrypt

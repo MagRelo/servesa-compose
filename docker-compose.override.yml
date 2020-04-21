@@ -6,9 +6,14 @@ services:
     restart: on-failure
     environment:
       url: http://localhost:8000
+    volumes:
+      - ./data/ghost:/var/lib/ghost/content
+      - ./data/ghost-theme:/var/lib/ghost/content/themes/ghost-theme
+      - ./data/ghost-theme:/var/lib/ghost/content/themes/new-theme
 
   nginx:
     image: nginx:1.15-alpine
+    container_name: nginx
     restart: unless-stopped
     volumes:
       - ./nginx/dev:/etc/nginx/conf.d
@@ -18,6 +23,7 @@ services:
     ports:
       - '80:80'
       - '443:443'
+      - '8000:8000'
     command: '/bin/sh -c ''while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g "daemon off;"'''
 
   certbot:
