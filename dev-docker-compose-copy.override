@@ -5,11 +5,9 @@ services:
     container_name: content
     restart: on-failure
     environment:
-      url: http://localhost:8000
+      url: http://localhost
     volumes:
       - ./data/ghost:/var/lib/ghost/content
-      - ./data/ghost-theme:/var/lib/ghost/content/themes/ghost-theme
-      - ./data/ghost-theme:/var/lib/ghost/content/themes/new-theme
 
   nginx:
     image: nginx:1.15-alpine
@@ -23,7 +21,7 @@ services:
     ports:
       - '80:80'
       - '443:443'
-      - '8000:8000'
+      - '2368:2368'
     command: '/bin/sh -c ''while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g "daemon off;"'''
 
   certbot:
@@ -32,4 +30,4 @@ services:
     volumes:
       - /:/etc/letsencrypt
       - /:/var/www/certbot
-    entrypoint: '/bin/true'
+    entrypoint: '/bin/true
