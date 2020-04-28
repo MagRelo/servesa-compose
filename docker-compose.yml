@@ -6,6 +6,7 @@ services:
     restart: on-failure
     environment:
       NODE_ENV: production
+      BASE_URL: https://mattlovan.com
       GHOST_PATH: https://content.mattlovan.com
       GHOST_KEY: 56c748b686a94f2f5ea7cd0f64
 
