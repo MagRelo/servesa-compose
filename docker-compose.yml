@@ -10,7 +10,7 @@ services:
     container_name: content
     restart: on-failure
     environment:
-      url: https://mattlovan.com
+      url: https://content.mattlovan.com
     volumes:
       - ./data/ghost:/var/lib/ghost/content
 
