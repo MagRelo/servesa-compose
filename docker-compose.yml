@@ -4,6 +4,10 @@ services:
     image: 'magrelo/servesa-home:latest'
     container_name: homepage
     restart: on-failure
+    environment:
+      NODE_ENV: production
+      GHOST_PATH: https://content.mattlovan.com
+      GHOST_KEY: 56c748b686a94f2f5ea7cd0f64
 
   content:
     image: 'ghost:latest'
