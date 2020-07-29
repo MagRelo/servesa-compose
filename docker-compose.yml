@@ -19,6 +19,11 @@ services:
     volumes:
       - ./data/ghost:/var/lib/ghost/content
 
+  midifighter:
+    image: 'magrelo/midifighter:latest'
+    container_name: homepage
+    restart: on-failure
+
   nginx:
     image: nginx:1.15-alpine
     container_name: nginx
