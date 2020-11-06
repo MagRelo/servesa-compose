@@ -4,7 +4,8 @@
   "description": "Server infrastructure for servesa.io",
   "main": "index.js",
   "scripts": {
-    "ssh": "ssh root@209.97.154.109"
+    "ssh": "ssh root@209.97.154.109",
+    "env": "scp .env root@209.97.154.109:/etc/servesa"
   },
   "repository": {
     "type": "git",
