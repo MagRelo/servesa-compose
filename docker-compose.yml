@@ -51,6 +51,7 @@ services:
     container_name: dk-chart
     restart: on-failure
     environment:
+      - NODE_ENV=$NODE_ENV
       - MONGODB_URL_INT=mongodb://${APP_MONGO_USER}:${APP_MONGO_PASS}@mongodb:27017/${APP_MONGO_DB}
       - INIT_DB=${INIT_DB}
 
