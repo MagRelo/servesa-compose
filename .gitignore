@@ -2,3 +2,5 @@ data
 stash
 
 docker-compose.override.yml
+
+.env
