@@ -24,11 +24,9 @@ services:
     container_name: homepage
     restart: on-failure
     environment:
-      - MONGODB_URL_INT=mongodb+srv://mm-bot:Q0lx6tY9YVAXI1SQ@cluster1.5hxbo.mongodb.net/mm-bot?retryWrites=true&w=majority
-      - DISCORD_KEY=Nzg4ODIxODM3NzQ3ODQ3MTY4.X9pFlQ.vZt0XoANgH9mnjJIjc9uscKcqzQ
+      - MONGODB_URL_INT=${MONGO_BOT}
+      - DISCORD_KEY=${DISCORD_KEY}
       - URL=midifighter.mattlovan.com
-      - NODE_ENV=$NODE_ENV
-      - INIT_DB=${INIT_DB}
 
   nginx:
     image: nginx:1.15-alpine
