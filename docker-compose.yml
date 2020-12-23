@@ -20,9 +20,15 @@ services:
       - ./data/ghost:/var/lib/ghost/content
 
   midifighter:
-    image: 'magrelo/midifighter:latest'
+    image: 'magrelo/mm-bot:latest'
     container_name: homepage
     restart: on-failure
+    environment:
+      - MONGODB_URL_INT=mongodb+srv://mm-bot:Q0lx6tY9YVAXI1SQ@cluster1.5hxbo.mongodb.net/mm-bot?retryWrites=true&w=majority
+      - DISCORD_KEY=Nzg4ODIxODM3NzQ3ODQ3MTY4.X9pFlQ.vZt0XoANgH9mnjJIjc9uscKcqzQ
+      - URL=midifighter.mattlovan.com
+      - NODE_ENV=$NODE_ENV
+      - INIT_DB=${INIT_DB}
 
   nginx:
     image: nginx:1.15-alpine
@@ -52,33 +58,5 @@ services:
     restart: on-failure
     environment:
       - NODE_ENV=$NODE_ENV
-      - MONGODB_URL_INT=mongodb://${APP_MONGO_USER}:${APP_MONGO_PASS}@mongodb:27017/${APP_MONGO_DB}
+      - MONGODB_URL_INT=mongodb://${APP_MONGO_USER}:${APP_MONGO_PASS}@mongodb:${MONGO_PORT}/${APP_MONGO_DB}
       - INIT_DB=${INIT_DB}
-
-  mongodb:
-    image: mongo:latest
-    container_name: 'mongodb'
-    hostname: 'mongodb'
-    ports:
-      - '27000:27000'
-    environment:
-      - MONGO_DATA_DIR=/data/db
-      - MONGO_LOG_DIR=/dev/null
-      - MONGO_PORT=${MONGO_PORT}
-      - MONGO_INITDB_DATABASE=admin
-      - MONGO_INITDB_ROOT_USERNAME=${MONGO_ROOT_USERNAME}
-      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_ROOT_PASSWORD}
-      - MONGO_REPLICA_SET_NAME=${MONGO_REPLICA_SET_NAME}
-      - MONGO_ROOT_USERNAME=${MONGO_ROOT_USERNAME}
-      - MONGO_ROOT_PASSWORD=${MONGO_ROOT_PASSWORD}
-      - APP_MONGO_DB=${APP_MONGO_DB}
-      - APP_MONGO_USER=${APP_MONGO_USER}
-      - APP_MONGO_PASS=${APP_MONGO_PASS}
-    volumes:
-      - ./data/db:/data/db
-      - ./mongo/createUsers.sh:/docker-entrypoint-initdb.d/createUsers.sh:ro
-    healthcheck:
-      test: test $$(echo "rs.initiate().ok || rs.status().ok" | mongo -u $${MONGO_ROOT_USERNAME} -p $${MONGO_ROOT_PASSWORD} --quiet) -eq 1
-      interval: 10s
-      start_period: 30s
-    command: mongod --oplogSize 128 --replSet ${MONGO_REPLICA_SET_NAME}
